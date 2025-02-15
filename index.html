@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"rel="stylesheet"/>
+    <link rel="stylesheet" href="master.css">
+</head>
+<body>
+    <section class="session">
+        <div class="content">
+            <h1>Meet our speakers</h1>
+            <p>
+                Our speaker lineup comprises leaders from Stripe and beyond,
+                who'll share knowledge and advice on the most pressing
+                topics facing companies today. Stay tuned for more
+                announcements.
+            </p>
+        </div>
+        <div class="slider">
+            <div class="nav">
+                <button class="left disable"></button>
+                <button class="right"></button>
+            </div>
+
+            <div class="sliders">
+                <div class="slid xpand">
+                    <h3>CEO AND COFOUNDER, ARKETA</h3>
+                    <h2>Rachel Lea Fishman</h2>
+                    <img src="img/speaker-rachel.svg" alt="">
+                </div>
+                <div class="slid">
+                    <h3>CEO AND CO-FOUNDER, FORMA</h3>
+                    <h2>Jason Fan</h2>
+                    <img src="img/speaker-json.svg" alt="">
+                </div>
+                <div class="slid">
+                    <h3>CEO, OPENAI</h3>
+                    <h2>Sam Altman</h2>
+                    <img src="img/speaker-sam.svg" alt="">
+                </div>
+                <div class="slid">
+                    <h3>SVP OF PRODUCT, JOBBER</h3>
+                    <h2>Jeff Sheclock</h2>
+                    <img src="img/speaker-jeff.svg" alt="">
+                </div>
+                <div class="slid">
+                    <h3>HEAD OF STRATEGY, SARDINE</h3>
+                    <h2>Simon Taylor</h2>
+                    <img src="img/speaker-simon.svg" alt="">
+                </div>
+                <div class="slid">
+                    <h3>HEAD OF GLOBAL SALES, STRIPE</h3>
+                    <h2>Eileen O'Mara</h2>
+                    <img src="img/speaker-eileen.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script>
+    
+    const left = document.querySelector('.left')
+    const right = document.querySelector('.right')
+    const slider = document.querySelectorAll('.slid')
+    let Index = 0
+
+    const goLeft= () =>{
+       if(Index > 0){
+        slider[Index].classList.remove('xpand')
+        Index--
+        slider[Index].classList.add('xpand')
+        right.classList.remove('disable')
+        if(Index <= 0){
+            left.classList.add('disable')
+        }
+       }
+    }
+    const goRight= () =>{
+       if(Index < 5){
+        slider[Index].classList.remove('xpand')
+        Index++
+        slider[Index].classList.add('xpand')
+        left.classList.remove('disable')
+        if(Index >= 5){
+            right.classList.add('disable')
+        }
+       }
+    }
+    left.addEventListener('click', goLeft)
+    right.addEventListener('click', goRight)
+
+
+    const expandThis = (index) => {
+        Index = index
+        for(let i = 0 ; i < slider.length ; i++){
+        slider[i].classList.remove('xpand')
+        } 
+        slider[Index].classList.add('xpand') 
+        if(Index > 0){
+            left.classList.remove('disable')
+        }else{
+            left.classList.add('disable')
+        }
+        if(Index < 5 ){
+            right.classList.remove('disable')
+        }else{
+            right.classList.add('disable')
+        }
+    }
+
+    for(let i = 0 ; i<slider.length ; i++){
+        slider[i].addEventListener('click',() => expandThis(i))
+    }
+</script>
+</html>
